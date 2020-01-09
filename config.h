@@ -28,7 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-#define SSD1306OLED
+// #define SSD1306OLED
+#undef USE_I2C
+#undef SSD1306OLED
 
 #define USE_SERIAL_PD2
 
@@ -51,8 +53,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #   define RGB_DISABLE_AFTER_TIMEOUT 0 // number of ticks to wait until disabling effects
 #   define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
 #   define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-// #   define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
-// #   define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
+ #   define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
+ #   define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
 #    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash. 
 #    define RGB_MATRIX_HUE_STEP 8
 #    define RGB_MATRIX_SAT_STEP 8
@@ -91,6 +93,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define DISABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
 
+//#define ACCEL_MOUSE
+#define CONSTANT_MOUSE
+
 #ifdef ACCEL_MOUSE
 #define MOUSEKEY_DELAY              0
 #define MOUSEKEY_INTERVAL           16
@@ -104,22 +109,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define MK_3_SPEED
 
-Not defined
-Enable momentary speed selection
-#define MK_C_OFFSET_UNMOD 16    //Cursor offset per movement (unmodified)
-#define MK_C_INTERVAL_UNMOD 16  //Time between cursor movements (unmodified)
-#define MK_C_OFFSET_0 1         //Cursor offset per movement (KC_ACL0)
-#define MK_C_INTERVAL_0 32      //Time between cursor movements (KC_ACL0)
-#define MK_C_OFFSET_1 4         //Cursor offset per movement (KC_ACL1)
+#define MK_C_OFFSET_0 4         //Cursor offset per movement (KC_ACL0)
+#define MK_C_INTERVAL_0 16      //Time between cursor movements (KC_ACL0)
+
+#define MK_C_OFFSET_1 16        //Cursor offset per movement (KC_ACL1)
 #define MK_C_INTERVAL_1 16      //Time between cursor movements (KC_ACL1)
+
 #define MK_C_OFFSET_2 32        //Cursor offset per movement (KC_ACL2)
 #define MK_C_INTERVAL_2 16      //Time between cursor movements (KC_ACL2)
-#define MK_W_OFFSET_UNMOD 1     //Scroll steps per scroll action (unmodified)
-#define MK_W_INTERVAL_UNMOD 40  //Time between scroll steps (unmodified)
+
 #define MK_W_OFFSET_0 1         //Scroll steps per scroll action (KC_ACL0)
 #define MK_W_INTERVAL_0 360     //Time between scroll steps (KC_ACL0)
+
 #define MK_W_OFFSET_1 1         //Scroll steps per scroll action (KC_ACL1)
 #define MK_W_INTERVAL_1 120     //Time between scroll steps (KC_ACL1)
+
 #define MK_W_OFFSET_2 1         //Scroll steps per scroll action (KC_ACL2)
 #define MK_W_INTERVAL_2 20      //Time between scroll steps (KC_ACL2)
 

@@ -49,9 +49,9 @@ CTL_T(KC_TAB),LCA(KC_J),MEH(KC_BSLS),XXXXXXX,XXXXXXX,XXXXXXX,/* */KC_LEFT, KC_DO
 	[5] = LAYOUT(
 		//Mouse
 		XXXXXXX, XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, KC_WH_U,/* */XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,/* */XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX,/* */XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-								   KC_LGUI, TO(0)  , KC_BTN1,/* */KC_BTN2, TO(0)  , LALT_T(XXXXXXX))
+  CTL_T(KC_TAB), XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,/* */XXXXXXX, KC_ACL2, KC_ACL1, KC_ACL0, XXXXXXX, XXXXXXX, 
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,/* */XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+								   KC_LGUI, TO(0)  , KC_BTN1,/* */KC_BTN2, TO(0)  , KC_BTN3)
 };
 
 int RGB_current_mode;
@@ -140,7 +140,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 				RGB_current_mode = rgblight_config.mode;
 				}
 			#endif
+			#ifdef RGB_MATRIX_ENABLE
+				if (record->event.pressed) {
+				eeconfig_update_rgb_matrix_default();
+				rgb_matrix_enable();
+				}
+			#endif
 			break;
   	}
   	return true;
 }
+
+#ifdef RGB_MATRIX_ENABLE
+
+void suspend_power_down_keymap(void) {
+    rgb_matrix_set_suspend_state(true);
+}
+
+void suspend_wakeup_init_keymap(void) {
+    rgb_matrix_set_suspend_state(false);
+}
+
+#endif
