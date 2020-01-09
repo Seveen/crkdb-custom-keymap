@@ -67,7 +67,6 @@ void matrix_init_user(void) {
 }
 
 #ifdef OLED_DRIVER_ENABLE
-
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
 
 void render_space(void) {
@@ -288,15 +287,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   	}
 
 	switch (keycode) {
-		case RGB_MOD:
-			#ifdef RGBLIGHT_ENABLE
-				if (record->event.pressed) {
-				rgblight_mode(RGB_current_mode);
-				rgblight_step();
-				RGB_current_mode = rgblight_config.mode;
-				}
-			#endif
-			return false;
 		case RGBRST:
 			#ifdef RGBLIGHT_ENABLE
 				if (record->event.pressed) {
